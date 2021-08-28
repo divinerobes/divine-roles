@@ -5,11 +5,11 @@ const IndexPage = () => {
   return (
     <div className="index">
       <Head>
-        <title>Divine Robes</title>
+        <title>Divine Roles</title>
       </Head>
-      <h1>Divine Robes</h1>
+      <h1>Divine Roles</h1>
       <div className="message">
-        You have been added to the Divine Robes Discord.
+        Welcome. You have been added to the Discord.
       </div>
       <style jsx>{`
         .index {
@@ -28,6 +28,7 @@ const IndexPage = () => {
         }
         .message {
           margin-top: 20px;
+          opacity: 0.5;
         }
         button {
           margin-top: 20px;

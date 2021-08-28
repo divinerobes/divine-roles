@@ -5,9 +5,9 @@ const IndexPage = () => {
   return (
     <div className="index">
       <Head>
-        <title>Divine Robes</title>
+        <title>Divine Roles</title>
       </Head>
-      <h1>Divine Robes</h1>
+      <h1>Divine Roles</h1>
       <div className="message">
         Sorry, there's a dress code. (Divine Robe wearers only)
       </div>
@@ -28,6 +28,7 @@ const IndexPage = () => {
         }
         .message {
           margin-top: 20px;
+          opacity: 0.5;
         }
         button {
           margin-top: 20px;
