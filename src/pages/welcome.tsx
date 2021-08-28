@@ -18,7 +18,11 @@ const IndexPage = () => {
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          height: 100vh;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
         }
         h1 {
           font-size: 32px;
