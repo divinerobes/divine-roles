@@ -84,3 +84,37 @@ export const removeFromServer = async (userID: string) => {
     else return res.text();
   });
 };
+
+export const setRolesForUser = async (roles: string[], userID: string) => {
+  await fetch(
+    `https://discord.com/api/v8/guilds/${process.env.DISCORD_SERVER_ID}/members/${userID}`,
+    {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bot ${process.env.DISCORD_CLIENT_TOKEN}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ roles })
+    }
+  ).then(res => res.json());
+};
+
+export const RolesToIDs: Record<string, string> = {
+  'Divine Robe': '881425623833276506',
+  'Divine Robe of Power': '881425733443014667',
+  'Divine Robe of Detection': '881425780578590741',
+  'Divine Robe of Perfection': '881425839076573185',
+  'Divine Robe of Reflection': '881425866977079346',
+  'Divine Robe of Fury': '881425900963528714',
+  'Divine Robe of Vitriol': '881425925919604737',
+  'Divine Robe of Rage': '881425956395446272',
+  'Divine Robe of the Fox': '881425974288326676',
+  'Divine Robe of Skill': '881425995024973834',
+  'Divine Robe of Brilliance': '881426015262490654',
+  'Divine Robe of Titans': '881426035642626048',
+  'Divine Robe of Protection': '881426056974843914',
+  'Divine Robe of Enlightenment': '881426082497179659',
+  'Divine Robe of the Twins': '881426115959349269',
+  'Divine Robe of Anger': '881426135961980979',
+  'Divine Robe of Giants': '881427638386827274'
+};

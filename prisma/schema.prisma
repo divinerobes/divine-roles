@@ -15,6 +15,7 @@ model User {
   address     String
   discordId   String?
   username    String?
+  robes       String[]
   inServer    Boolean  @default(false)
   lastChecked DateTime @default(now())
 }
