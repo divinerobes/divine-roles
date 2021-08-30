@@ -85,6 +85,19 @@ export const removeFromServer = async (userID: string) => {
   });
 };
 
+export const getRolesForUser = async (userId: string) => {
+  return await fetch(
+    `https://discord.com/api/v8/guilds/${process.env.DISCORD_SERVER_ID}/members/${userId}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bot ${process.env.DISCORD_CLIENT_TOKEN}`,
+        'Content-Type': 'application/json'
+      }
+    }
+  ).then(res => res.json());
+};
+
 export const setRolesForUser = async (roles: string[], userID: string) => {
   await fetch(
     `https://discord.com/api/v8/guilds/${process.env.DISCORD_SERVER_ID}/members/${userID}`,
@@ -97,6 +110,30 @@ export const setRolesForUser = async (roles: string[], userID: string) => {
       body: JSON.stringify({ roles })
     }
   ).then(res => res.json());
+};
+export const addRoleForUser = async (roleId: string, userID: string) => {
+  await fetch(
+    `https://discord.com/api/v8/guilds/${process.env.DISCORD_SERVER_ID}/members/${userID}/roles/${roleId}`,
+    {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bot ${process.env.DISCORD_CLIENT_TOKEN}`,
+        'Content-Type': 'application/json'
+      }
+    }
+  ).then(res => res.text());
+};
+export const removeRoleForUser = async (roleId: string, userID: string) => {
+  await fetch(
+    `https://discord.com/api/v8/guilds/${process.env.DISCORD_SERVER_ID}/members/${userID}/roles/${roleId}`,
+    {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bot ${process.env.DISCORD_CLIENT_TOKEN}`,
+        'Content-Type': 'application/json'
+      }
+    }
+  ).then(res => res.text());
 };
 
 export const RolesToIDs: Record<string, string> = {
@@ -118,3 +155,5 @@ export const RolesToIDs: Record<string, string> = {
   'Divine Robe of Anger': '881426135961980979',
   'Divine Robe of Giants': '881427638386827274'
 };
+
+export const AdminRoleID = '881277625820127232';
