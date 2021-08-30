@@ -24,6 +24,9 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
           background-color: black;
           color: white;
         }
+        a {
+          color: inherit;
+        }
       `}</style>
     </div>
   );

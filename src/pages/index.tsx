@@ -40,6 +40,12 @@ const IndexPage = () => {
       ) : (
         <button onClick={verifyAndJoin}>Verify your Divine Role</button>
       )}
+
+      <div className="links">
+        <a href="https://robes.market/" target="_blank">
+          Find Divine Robes for sale and check prices at robes.market.
+        </a>
+      </div>
       <style jsx>{`
         .index {
           padding: 20px;
@@ -64,8 +70,7 @@ const IndexPage = () => {
           padding: 0;
           font-weight: normal;
         }
-        button,
-        a {
+        button {
           margin-top: 20px;
           background-color: transparent;
           border: none;
@@ -79,6 +84,13 @@ const IndexPage = () => {
           text-decoration: none;
           padding: 10px 20px;
           border-radius: 5px;
+        }
+        .links {
+          position: fixed;
+          bottom: 0;
+          padding: 20px 75px;
+          text-align: center;
+          line-height: 1.3em;
         }
       `}</style>
     </div>
