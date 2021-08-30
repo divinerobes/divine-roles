@@ -3,7 +3,6 @@ import { utils } from 'ethers';
 import { SIGNATURE_TEXT } from '@app/features/useSignature';
 import { getLoginURL } from '@server/services/Discord';
 import { getBagsInWallet } from 'loot-sdk';
-import { DivineRobesIds } from '@server/data/DivineRobes';
 import prisma from '@server/helpers/prisma';
 
 const api = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -16,7 +15,9 @@ const api = async (req: NextApiRequest, res: NextApiResponse) => {
     utils.verifyMessage(SIGNATURE_TEXT, signature).toLowerCase();
   if (verified) {
     const bags = await getBagsInWallet(account.toLowerCase());
-    const filteredBags = bags.filter(bag => DivineRobesIds.includes(bag.id));
+    const filteredBags = bags.filter(bag =>
+      bag.chest.toLowerCase().includes('divine robe')
+    );
     if (filteredBags.length > 0) {
       let [user] = await prisma.user.findMany({
         where: { address: account.toLowerCase() }

@@ -1,4 +1,3 @@
-import { DivineRobesIds } from '@server/data/DivineRobes';
 import prisma from '@server/helpers/prisma';
 import {
   addToServer,
@@ -21,7 +20,9 @@ const api = async (req: NextApiRequest, res: NextApiResponse) => {
 
   // reconfirm user has permissions
   const bags = await getBagsInWallet(user.address.toLowerCase());
-  const filteredBags = bags.filter(bag => DivineRobesIds.includes(bag.id));
+  const filteredBags = bags.filter(bag =>
+    bag.chest.toLowerCase().includes('divine robe')
+  );
   if (!filteredBags.length) return res.redirect('/unauthorized');
 
   await prisma.user.update({

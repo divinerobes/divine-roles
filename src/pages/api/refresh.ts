@@ -1,4 +1,3 @@
-import { DivineRobesIds } from '@server/data/DivineRobes';
 import prisma from '@server/helpers/prisma';
 import {
   addRoleForUser,
@@ -21,7 +20,9 @@ const api: NextApiHandler = async (_req, res) => {
   });
   for (const user of usersToRefresh) {
     const bags = await getBagsInWallet(user.address.toLowerCase());
-    const filteredBags = bags.filter(bag => DivineRobesIds.includes(bag.id));
+    const filteredBags = bags.filter(bag =>
+      bag.chest.toLowerCase().includes('divine robe')
+    );
     console.log(
       `${user.username} ${user.address} has ${
         filteredBags.length
@@ -57,6 +58,7 @@ const api: NextApiHandler = async (_req, res) => {
           existingRoleIds?.filter(x => !newRoleIds?.includes(x)) || [];
         const toAdd =
           newRoleIds?.filter(x => !existingRoleIds?.includes(x)) || [];
+
         for (const roleId of toRemove) {
           if (roleId == AdminRoleID) continue;
           await new Promise(resolve => setTimeout(resolve, 250));

@@ -11,14 +11,14 @@
     "@walletconnect/web3-provider": "^1.6.5",
     "dayjs": "^1.10.6",
     "ethers": "^5.4.6",
-    "loot-sdk": "^0.1.1",
+    "loot-sdk": "^0.1.2",
     "next": "^11.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "zustand": "^3.5.10"
   },
   "devDependencies": {
-    "@types/node": "^16.7.4",
+    "@types/node": "^16.7.6",
     "@types/react": "^17.0.19",
     "prisma": "2.30.0",
     "typescript": "^4.4.2"
