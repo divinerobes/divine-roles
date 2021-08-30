@@ -15,7 +15,7 @@ const api: NextApiHandler = async (_req, res) => {
   const usersToRefresh = await prisma.user.findMany({
     where: {
       discordId: { not: null },
-      lastChecked: { lt: dayjs().subtract(10, 'seconds').toDate() }
+      lastChecked: { lt: dayjs().subtract(1, 'minute').toDate() }
     }
   });
   for (const user of usersToRefresh) {
@@ -28,7 +28,7 @@ const api: NextApiHandler = async (_req, res) => {
         filteredBags.length
       } robes: (${filteredBags.map(bag => bag.chest).join(', ')})`
     );
-    if (filteredBags.length == 0) {
+    if (filteredBags.length == 0 && user.inServer) {
       await prisma.user.update({
         where: { id: user.id },
         data: { lastChecked: new Date(), inServer: false, robes: [] }
@@ -58,16 +58,15 @@ const api: NextApiHandler = async (_req, res) => {
           existingRoleIds?.filter(x => !newRoleIds?.includes(x)) || [];
         const toAdd =
           newRoleIds?.filter(x => !existingRoleIds?.includes(x)) || [];
-
         for (const roleId of toRemove) {
           if (roleId == AdminRoleID) continue;
-          await new Promise(resolve => setTimeout(resolve, 250));
+          await new Promise(resolve => setTimeout(resolve, 100));
           console.log('Removing role for user', roleId, user.discordId);
           await removeRoleForUser(roleId, user.discordId);
         }
         for (const roleId of toAdd) {
           if (roleId == AdminRoleID) continue;
-          await new Promise(resolve => setTimeout(resolve, 250));
+          await new Promise(resolve => setTimeout(resolve, 100));
           console.log('Adding role for user', roleId, user.discordId);
           await addRoleForUser(roleId, user.discordId);
         }
