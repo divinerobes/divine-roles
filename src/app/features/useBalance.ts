@@ -1,5 +1,5 @@
 import { Contract } from 'ethers';
-import ABI from '@abis/Loot.json';
+import ABI from '@data/abis/Loot.json';
 import getJsonRpcProvider from './getJsonRpcProvider';
 import { useWallet } from '@gimmixorg/use-wallet';
 import { useEffect, useState } from 'react';

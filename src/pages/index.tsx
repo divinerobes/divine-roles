@@ -2,7 +2,6 @@ import React from 'react';
 import { useWallet } from '@gimmixorg/use-wallet';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import useSignature from '@app/features/useSignature';
-import Head from 'next/head';
 import Router from 'next/router';
 
 const IndexPage = () => {
@@ -13,87 +12,77 @@ const IndexPage = () => {
     Router.push(`/api/verify?account=${account}&signature=${signature}`);
   };
   return (
-    <div className="index">
-      <Head>
-        <title>Divine Roles</title>
-      </Head>
+    <>
       <h1>Divine Roles</h1>
       <div className="message">You must have Divine Robes to enter.</div>
       {!account ? (
-        <button
-          onClick={() =>
-            connect({
-              providerOptions: {
-                walletconnect: {
-                  package: WalletConnectProvider,
-                  options: {
-                    infuraId: 'b95f6330bfdd4f5d8960db9d1d3da676'
+        <>
+          <button
+            onClick={() =>
+              connect({
+                providerOptions: {
+                  walletconnect: {
+                    package: WalletConnectProvider,
+                    options: {
+                      infuraId: 'b95f6330bfdd4f5d8960db9d1d3da676'
+                    }
                   }
+                },
+                theme: {
+                  background: 'black',
+                  main: '#fff',
+                  secondary: '#fff',
+                  border: 'black',
+                  hover: '#111'
                 }
-              },
-              theme: 'dark'
-            })
-          }
-        >
-          Connect Wallet
-        </button>
+              })
+            }
+          >
+            Connect Wallet
+          </button>
+          <a href="https://robes.market/">Buy Divine Robes at robes.market →</a>
+        </>
       ) : (
         <button onClick={verifyAndJoin}>Verify your Divine Role</button>
       )}
-
-      <div className="links">
-        <a href="https://robes.market/" target="_blank">
-          Find Divine Robes for sale and check prices at robes.market.
-        </a>
-      </div>
-      <style jsx>{`
-        .index {
-          padding: 20px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
+      <style jsx global>{`
+        .walletconnect-qrcode__base {
+          background-color: black !important;
         }
-        .message {
-          margin-top: 20px;
-          opacity: 0.5;
+        .walletconnect-modal__base {
+          padding: 20px 0 !important;
+          background-color: transparent !important;
+          box-shadow: none !important;
         }
-
-        h1 {
-          font-size: 32px;
-          margin: 0;
-          padding: 0;
-          font-weight: normal;
+        .walletconnect-modal__mobile__toggle_selector {
+          border-radius: 0 !important;
         }
-        button {
-          margin-top: 20px;
-          background-color: transparent;
-          border: none;
-          outline: none;
+        .walletconnect-qrcode__text {
+          margin-top: 30px !important;
+          font-family: serif !important;
+          font-size: 18px !important;
+          font-weight: normal !important;
+          color: white !important;
+          opacity: 1 !important;
+        }
+        .walletconnect-modal__footer a {
+          color: white !important;
+        }
+        .walletconnect-modal__mobile__toggle {
+          width: 100% !important;
+          background-color: black !important;
+        }
+        .walletconnect-modal__mobile__toggle a {
+          font-size: 18px !important;
+        }
+        .walletconnect-modal__mobile__toggle_selector {
+          background-color: #222 !important;
+        }
+        .walletconnect-modal__base__row__h3 {
           color: white;
-          font-family: serif;
-          padding: 0;
-          font-size: 18px;
-          cursor: pointer;
-          background-color: hsl(203, 18%, 19%);
-          text-decoration: none;
-          padding: 10px 20px;
-          border-radius: 5px;
-        }
-        .links {
-          position: fixed;
-          bottom: 0;
-          padding: 20px 75px;
-          text-align: center;
-          line-height: 1.3em;
         }
       `}</style>
-    </div>
+    </>
   );
 };
 

@@ -15,7 +15,11 @@ const api: NextApiHandler = async (_req, res) => {
   const usersToRefresh = await prisma.user.findMany({
     where: {
       discordId: { not: null },
-      lastChecked: { lt: dayjs().subtract(1, 'minute').toDate() }
+      inServer: true,
+      lastChecked: { lt: dayjs().subtract(2, 'minute').toDate() }
+    },
+    orderBy: {
+      lastChecked: 'asc'
     }
   });
   for (const user of usersToRefresh) {
@@ -28,14 +32,15 @@ const api: NextApiHandler = async (_req, res) => {
         filteredBags.length
       } robes: (${filteredBags.map(bag => bag.chest).join(', ')})`
     );
-    if (filteredBags.length == 0 && user.inServer) {
+    if (filteredBags.length == 0) {
+      console.log('Should kick', user.username);
       await prisma.user.update({
         where: { id: user.id },
         data: { lastChecked: new Date(), inServer: false, robes: [] }
       });
       try {
         console.log(`Removing ${user.username} from server`);
-        await removeFromServer(user.id);
+        await removeFromServer(user.discordId as string);
       } catch (err) {
         console.log(err);
       }

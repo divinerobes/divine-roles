@@ -2,19 +2,26 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
+    "build-static": "next build && next export",
     "start": "next start"
   },
   "main": "",
   "dependencies": {
+    "@apollo/client": "^3.4.10",
     "@gimmixorg/use-wallet": "^0.0.25",
     "@prisma/client": "2.30.0",
     "@walletconnect/web3-provider": "^1.6.5",
     "dayjs": "^1.10.6",
     "ethers": "^5.4.6",
+    "fuse.js": "^6.4.6",
+    "graphql": "^15.5.1",
     "loot-sdk": "^0.1.2",
     "next": "^11.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-ens-name": "^0.1.1",
+    "react-icons": "^4.2.0",
+    "swr": "^1.0.0",
     "zustand": "^3.5.10"
   },
   "devDependencies": {
